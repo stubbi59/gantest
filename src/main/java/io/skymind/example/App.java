@@ -27,6 +27,7 @@ import java.util.Arrays;
 
 public class App
     {
+    private static final int SEED = 24;
     private static final double LEARNING_RATE = 0.00015;
     private static final double L2 = 0.005;
     private static final double GRADIENT_THRESHOLD = 100.0;
@@ -58,7 +59,7 @@ public class App
     private static MultiLayerConfiguration generator()
         {
         MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
-                .seed(66)
+                .seed(SEED)
                 .updater(UPDATER)
                 .gradientNormalization(GradientNormalization.RenormalizeL2PerLayer)
                 .gradientNormalizationThreshold(GRADIENT_THRESHOLD)
@@ -90,7 +91,7 @@ public class App
     private static MultiLayerConfiguration discriminator()
         {
         MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
-                .seed(66)
+                .seed(SEED)
                 .updater(UPDATER)
                 .gradientNormalization(GradientNormalization.RenormalizeL2PerLayer)
                 .gradientNormalizationThreshold(GRADIENT_THRESHOLD)
@@ -125,9 +126,9 @@ public class App
 
     public static void main(String... args) throws Exception
         {
-        Nd4j.getMemoryManager().setAutoGcWindow(15 * 1000);
+        Nd4j.getMemoryManager().setAutoGcWindow(10 * 1000);
 
-        MnistDataSetIterator trainData = new MnistDataSetIterator(128, true, 42);
+        MnistDataSetIterator trainData = new MnistDataSetIterator(128, true, SEED);
 
         MultiLayerNetwork gen = new MultiLayerNetwork(generator());
         MultiLayerNetwork dis = new MultiLayerNetwork(discriminator());
@@ -164,7 +165,7 @@ public class App
                 DataSet data = DataSet.merge(Arrays.asList(realSet, fakeSet));
 
                 dis.fit(data);
-                //dis.fit(data);
+                dis.fit(data);
                 //dis.fit(realSet);
                 //dis.fit(fakeSet);
 
