@@ -1,0 +1,155 @@
+Deeplearning4j OOM Exception Encountered for MultiLayerNetwork
+Timestamp:                              2019-11-03 13:13:58.992
+Thread ID                               32
+Thread Name                             io.skymind.example.App.main()
+
+
+Stack Trace:
+java.lang.OutOfMemoryError: GC overhead limit exceeded
+	at java.lang.StringBuilder.toString(StringBuilder.java:407)
+	at org.nd4j.linalg.jcublas.buffer.BaseCudaDataBuffer.getUniqueId(BaseCudaDataBuffer.java:1611)
+	at org.nd4j.linalg.memory.deallocation.DeallocatorService.pickObject(DeallocatorService.java:81)
+	at org.nd4j.linalg.jcublas.buffer.BaseCudaDataBuffer.<init>(BaseCudaDataBuffer.java:333)
+	at org.nd4j.linalg.jcublas.buffer.CudaFloatDataBuffer.<init>(CudaFloatDataBuffer.java:67)
+	at org.nd4j.linalg.jcublas.buffer.factory.CudaDataBufferFactory.create(CudaDataBufferFactory.java:417)
+	at org.nd4j.linalg.factory.Nd4j.createBuffer(Nd4j.java:1418)
+	at org.nd4j.linalg.jcublas.JCublasNDArrayFactory.createUninitialized(JCublasNDArrayFactory.java:1553)
+	at org.nd4j.linalg.factory.Nd4j.createUninitialized(Nd4j.java:4363)
+	at org.nd4j.linalg.api.ndarray.BaseNDArray.mmuli(BaseNDArray.java:3172)
+	at org.deeplearning4j.nn.layers.BaseLayer.preOutputWithPreNorm(BaseLayer.java:316)
+	at org.deeplearning4j.nn.layers.BaseLayer.preOutput(BaseLayer.java:289)
+	at org.deeplearning4j.nn.layers.BaseLayer.activate(BaseLayer.java:337)
+	at org.deeplearning4j.nn.layers.AbstractLayer.activate(AbstractLayer.java:257)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.ffToLayerActivationsInWs(MultiLayerNetwork.java:1129)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.computeGradientAndScore(MultiLayerNetwork.java:2741)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.computeGradientAndScore(MultiLayerNetwork.java:2699)
+	at org.deeplearning4j.optimize.solvers.BaseOptimizer.gradientAndScore(BaseOptimizer.java:170)
+	at org.deeplearning4j.optimize.solvers.StochasticGradientDescent.optimize(StochasticGradientDescent.java:63)
+	at org.deeplearning4j.optimize.Solver.optimize(Solver.java:52)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.fitHelper(MultiLayerNetwork.java:2303)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.fit(MultiLayerNetwork.java:2261)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.fit(MultiLayerNetwork.java:2324)
+	at io.skymind.example.App.main(App.java:170)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:282)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+========== Memory Information ==========
+----- Version Information -----
+Deeplearning4j Version                  1.0.0-beta5
+Deeplearning4j CUDA                     deeplearning4j-cuda-10.1
+
+----- System Information -----
+Operating System                        GNU/Linux Ubuntu 19.10
+CPU                                     Intel(R) Xeon(R) CPU E3-1270 V2 @ 3.50GHz
+CPU Cores - Physical                    4
+CPU Cores - Logical                     8
+Total System Memory                      15.59 GiB (16743292928)
+Number of GPUs Detected                 1
+  Name                           CC                Total Memory              Used Memory              Free Memory
+  GeForce RTX 2060 SUPER         7.5      7.79 GiB (8369668096)    2.85 GiB (3061383168)    4.94 GiB (5308284928)
+
+----- ND4J Environment Information -----
+Data Type                               FLOAT
+backend                                 CUDA
+blas.vendor                             CUBLAS
+os                                      Linux
+
+----- Memory Configuration -----
+JVM Memory: XMX                           3.84 GiB (4123525120)
+JVM Memory: current                       3.84 GiB (4123525120)
+JavaCPP Memory: Max Bytes                 8.00 GiB (8589934592)
+JavaCPP Memory: Max Physical             10.00 GiB (10737418240)
+JavaCPP Memory: Current Bytes            38.69 MiB (40567232)
+JavaCPP Memory: Current Physical          9.19 GiB (9870389248)
+Periodic GC Enabled                     false
+
+----- Workspace Information -----
+Workspaces: # for current thread        4
+Current thread workspaces:
+  Name                      State       Size                          # Cycles            
+  WS_LAYER_WORKING_MEM      CLOSED        1.02 MiB (1069563)          10332446            
+  WS_ALL_LAYERS_ACT         CLOSED       17.01 MiB (17836224)         977394              
+  WS_LAYER_ACT_2            CLOSED      522.24 KiB (534773)           2513296             
+  WS_LAYER_ACT_1            CLOSED      522.24 KiB (534773)           2652923             
+Workspaces total size                    19.05 MiB (19975333)
+
+----- Network Information -----
+Network # Parameters                    2946577
+Parameter Memory                         11.24 MiB (11786308)
+Parameter Gradients Memory               11.24 MiB (11786308)
+Updater Number of Elements              2972704
+Updater Memory                           11.34 MiB (11890816)
+Updater Classes:
+  org.nd4j.linalg.learning.AdamUpdater
+  org.nd4j.linalg.learning.SgdUpdater
+Params + Gradient + Updater Memory       22.58 MiB (23677124)
+Iteration Count                         139627
+Epoch Count                             0
+Backprop Type                           Standard
+Workspace Mode: Training                ENABLED
+Workspace Mode: Inference               ENABLED
+Number of Layers                        17
+Layer Counts
+  ActivationLayer                         6
+  DenseLayer                              7
+  DropoutLayer                            3
+  OutputLayer                             1
+Layer Parameter Breakdown
+  Idx Name                 Layer Type           Layer # Parameters   Layer Parameter Memory
+  0   layer0               DenseLayer           25856                101.00 KiB (103424) 
+  1   layer1               ActivationLayer      0                         .00 B          
+  2   layer2               DenseLayer           131584               514.00 KiB (526336) 
+  3   layer3               ActivationLayer      0                         .00 B          
+  4   layer4               DenseLayer           525312                 2.00 MiB (2101248)
+  5   layer5               ActivationLayer      0                         .00 B          
+  6   layer6               DenseLayer           803600                 3.07 MiB (3214400)
+  7   layer7               DenseLayer           803840                 3.07 MiB (3215360)
+  8   layer8               ActivationLayer      0                         .00 B          
+  9   layer9               DropoutLayer         0                         .00 B          
+  10  layer10              DenseLayer           524800                 2.00 MiB (2099200)
+  11  layer11              ActivationLayer      0                         .00 B          
+  12  layer12              DropoutLayer         0                         .00 B          
+  13  layer13              DenseLayer           131328               513.00 KiB (525312) 
+  14  layer14              ActivationLayer      0                         .00 B          
+  15  layer15              DropoutLayer         0                         .00 B          
+  16  layer16              OutputLayer          257                    1.00 KiB (1028)   
+
+----- Layer Helpers - Memory Use -----
+Total Helper Count                      0
+Helper Count w/ Memory                  0
+Total Helper Persistent Memory Use           .00 B
+
+----- Network Activations: Inferred Activation Shapes -----
+Current Minibatch Size                  128
+Input Shape                             [128, 100]
+Idx Name                 Layer Type           Activations Type                           Activations Shape    # Elements   Memory      
+0   layer0               DenseLayer           InputTypeFeedForward(256)                  [128, 256]           32768        128.00 KiB (131072)
+1   layer1               ActivationLayer      InputTypeFeedForward(256)                  [128, 256]           32768        128.00 KiB (131072)
+2   layer2               DenseLayer           InputTypeFeedForward(512)                  [128, 512]           65536        256.00 KiB (262144)
+3   layer3               ActivationLayer      InputTypeFeedForward(512)                  [128, 512]           65536        256.00 KiB (262144)
+4   layer4               DenseLayer           InputTypeFeedForward(1024)                 [128, 1024]          131072       512.00 KiB (524288)
+5   layer5               ActivationLayer      InputTypeFeedForward(1024)                 [128, 1024]          131072       512.00 KiB (524288)
+6   layer6               DenseLayer           InputTypeFeedForward(784)                  [128, 784]           100352       392.00 KiB (401408)
+7   layer7               DenseLayer           InputTypeFeedForward(1024)                 [128, 1024]          131072       512.00 KiB (524288)
+8   layer8               ActivationLayer      InputTypeFeedForward(1024)                 [128, 1024]          131072       512.00 KiB (524288)
+9   layer9               DropoutLayer         InputTypeFeedForward(1024)                 [128, 1024]          131072       512.00 KiB (524288)
+10  layer10              DenseLayer           InputTypeFeedForward(512)                  [128, 512]           65536        256.00 KiB (262144)
+11  layer11              ActivationLayer      InputTypeFeedForward(512)                  [128, 512]           65536        256.00 KiB (262144)
+12  layer12              DropoutLayer         InputTypeFeedForward(512)                  [128, 512]           65536        256.00 KiB (262144)
+13  layer13              DenseLayer           InputTypeFeedForward(256)                  [128, 256]           32768        128.00 KiB (131072)
+14  layer14              ActivationLayer      InputTypeFeedForward(256)                  [128, 256]           32768        128.00 KiB (131072)
+15  layer15              DropoutLayer         InputTypeFeedForward(256)                  [128, 256]           32768        128.00 KiB (131072)
+16  layer16              OutputLayer          InputTypeFeedForward(1)                    [128, 1]             128            512.00 B  
+Total Activations Memory                  4.76 MiB (4989440)
+Total Activations Memory (per ex)        38.07 KiB (38980)
+Total Activation Gradient Mem.            4.81 MiB (5040128)
+Total Activation Gradient Mem. (per ex)  38.45 KiB (39376)
+
+----- Network Training Listeners -----
+Number of Listeners                     1
+Listener 0                              org.deeplearning4j.optimize.listeners.PerformanceListener@5b0f3875

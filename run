@@ -1,0 +1,2 @@
+export _JAVA_OPTIONS="-Xms1G -Xmx5G -Dorg.bytedeco.javacpp.maxbytes=8G -Dorg.bytedeco.javacpp.maxphysicalbytes=8G -XX:+AggressiveHeap"
+mvn compile exec:java -Dexec.mainClass="io.skymind.example.App"

@@ -1,0 +1,134 @@
+Deeplearning4j OOM Exception Encountered for MultiLayerNetwork
+Timestamp:                              2019-11-06 11:39:06.288
+Thread ID                               32
+Thread Name                             io.skymind.example.App.main()
+
+
+Stack Trace:
+java.lang.OutOfMemoryError: GC overhead limit exceeded
+	at org.nd4j.jita.handler.impl.CudaZeroHandler.getDevicePointer(CudaZeroHandler.java:735)
+	at org.nd4j.jita.allocator.impl.AtomicAllocator.getPointer(AtomicAllocator.java:325)
+	at org.nd4j.linalg.jcublas.ops.executioner.CudaExecutioner.naiveExec(CudaExecutioner.java:272)
+	at org.nd4j.linalg.jcublas.ops.executioner.CudaExecutioner.exec(CudaExecutioner.java:572)
+	at org.nd4j.linalg.api.ndarray.BaseNDArray.norm2(BaseNDArray.java:4042)
+	at org.nd4j.linalg.api.ndarray.BaseNDArray.norm2(BaseNDArray.java:4047)
+	at org.nd4j.linalg.api.ndarray.BaseNDArray.norm2Number(BaseNDArray.java:1198)
+	at org.deeplearning4j.nn.updater.BaseMultiLayerUpdater.preApply(BaseMultiLayerUpdater.java:413)
+	at org.deeplearning4j.nn.updater.BaseMultiLayerUpdater.update(BaseMultiLayerUpdater.java:305)
+	at org.deeplearning4j.nn.updater.BaseMultiLayerUpdater.update(BaseMultiLayerUpdater.java:249)
+	at org.deeplearning4j.optimize.solvers.BaseOptimizer.updateGradientAccordingToParams(BaseOptimizer.java:305)
+	at org.deeplearning4j.optimize.solvers.BaseOptimizer.gradientAndScore(BaseOptimizer.java:182)
+	at org.deeplearning4j.optimize.solvers.StochasticGradientDescent.optimize(StochasticGradientDescent.java:63)
+	at org.deeplearning4j.optimize.Solver.optimize(Solver.java:52)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.fitHelper(MultiLayerNetwork.java:2303)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.fit(MultiLayerNetwork.java:2261)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.fit(MultiLayerNetwork.java:2324)
+	at io.skymind.example.App.main(App.java:155)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:282)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+========== Memory Information ==========
+----- Version Information -----
+Deeplearning4j Version                  1.0.0-beta5
+Deeplearning4j CUDA                     deeplearning4j-cuda-10.1
+
+----- System Information -----
+Operating System                        GNU/Linux Ubuntu 19.10
+CPU                                     Intel(R) Xeon(R) CPU E3-1270 V2 @ 3.50GHz
+CPU Cores - Physical                    4
+CPU Cores - Logical                     8
+Total System Memory                      15.59 GiB (16743292928)
+Number of GPUs Detected                 1
+  Name                           CC                Total Memory              Used Memory              Free Memory
+  GeForce RTX 2060 SUPER         7.5      7.79 GiB (8369668096)    2.83 GiB (3037134848)    4.97 GiB (5332533248)
+
+----- ND4J Environment Information -----
+Data Type                               FLOAT
+backend                                 CUDA
+blas.vendor                             CUBLAS
+os                                      Linux
+
+----- Memory Configuration -----
+JVM Memory: XMX                           3.81 GiB (4085776384)
+JVM Memory: current                       3.81 GiB (4085776384)
+JavaCPP Memory: Max Bytes                 8.00 GiB (8589934592)
+JavaCPP Memory: Max Physical             10.00 GiB (10737418240)
+JavaCPP Memory: Current Bytes            38.91 MiB (40796608)
+JavaCPP Memory: Current Physical          8.56 GiB (9188560896)
+Periodic GC Enabled                     false
+
+----- Workspace Information -----
+Workspaces: # for current thread        4
+Current thread workspaces:
+  Name                      State       Size                          # Cycles            
+  WS_LAYER_WORKING_MEM      CLOSED        2.04 MiB (2139111)          9807758             
+  WS_ALL_LAYERS_ACT         CLOSED       17.01 MiB (17836224)         927760              
+  WS_LAYER_ACT_2            CLOSED        1.02 MiB (1069547)          2385671             
+  WS_LAYER_ACT_1            CLOSED        1.02 MiB (1069547)          2518208             
+Workspaces total size                    21.09 MiB (22114429)
+
+----- Network Information -----
+Network # Parameters                    1460225
+Parameter Memory                          5.57 MiB (5840900)
+Parameter Gradients Memory                5.57 MiB (5840900)
+Updater Number of Elements              2920450
+Updater Memory                           11.14 MiB (11681800)
+Updater Classes:
+  org.nd4j.linalg.learning.AdamUpdater
+Params + Gradient + Updater Memory       16.71 MiB (17522700)
+Iteration Count                         265074
+Epoch Count                             0
+Backprop Type                           Standard
+Workspace Mode: Training                ENABLED
+Workspace Mode: Inference               ENABLED
+Number of Layers                        10
+Layer Counts
+  ActivationLayer                         3
+  DenseLayer                              3
+  DropoutLayer                            3
+  OutputLayer                             1
+Layer Parameter Breakdown
+  Idx Name                 Layer Type           Layer # Parameters   Layer Parameter Memory
+  0   layer0               DenseLayer           803840                 3.07 MiB (3215360)
+  1   layer1               ActivationLayer      0                         .00 B          
+  2   layer2               DropoutLayer         0                         .00 B          
+  3   layer3               DenseLayer           524800                 2.00 MiB (2099200)
+  4   layer4               ActivationLayer      0                         .00 B          
+  5   layer5               DropoutLayer         0                         .00 B          
+  6   layer6               DenseLayer           131328               513.00 KiB (525312) 
+  7   layer7               ActivationLayer      0                         .00 B          
+  8   layer8               DropoutLayer         0                         .00 B          
+  9   layer9               OutputLayer          257                    1.00 KiB (1028)   
+
+----- Layer Helpers - Memory Use -----
+Total Helper Count                      0
+Helper Count w/ Memory                  0
+Total Helper Persistent Memory Use           .00 B
+
+----- Network Activations: Inferred Activation Shapes -----
+Current Minibatch Size                  256
+Input Shape                             [256, 784]
+Idx Name                 Layer Type           Activations Type                           Activations Shape    # Elements   Memory      
+0   layer0               DenseLayer           InputTypeFeedForward(1024)                 [256, 1024]          262144         1.00 MiB (1048576)
+1   layer1               ActivationLayer      InputTypeFeedForward(1024)                 [256, 1024]          262144         1.00 MiB (1048576)
+2   layer2               DropoutLayer         InputTypeFeedForward(1024)                 [256, 1024]          262144         1.00 MiB (1048576)
+3   layer3               DenseLayer           InputTypeFeedForward(512)                  [256, 512]           131072       512.00 KiB (524288)
+4   layer4               ActivationLayer      InputTypeFeedForward(512)                  [256, 512]           131072       512.00 KiB (524288)
+5   layer5               DropoutLayer         InputTypeFeedForward(512)                  [256, 512]           131072       512.00 KiB (524288)
+6   layer6               DenseLayer           InputTypeFeedForward(256)                  [256, 256]           65536        256.00 KiB (262144)
+7   layer7               ActivationLayer      InputTypeFeedForward(256)                  [256, 256]           65536        256.00 KiB (262144)
+8   layer8               DropoutLayer         InputTypeFeedForward(256)                  [256, 256]           65536        256.00 KiB (262144)
+9   layer9               OutputLayer          InputTypeFeedForward(1)                    [256, 1]             256            1.00 KiB (1024)
+Total Activations Memory                  5.25 MiB (5506048)
+Total Activations Memory (per ex)        21.00 KiB (21508)
+Total Activation Gradient Mem.            6.02 MiB (6307840)
+Total Activation Gradient Mem. (per ex)  24.06 KiB (24640)
+
+----- Network Training Listeners -----
+Number of Listeners                     1
+Listener 0                              org.deeplearning4j.optimize.listeners.PerformanceListener@5d7a678c
